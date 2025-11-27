@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск пользователей</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-custom {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 30px;
+        }
+        .user-info {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+        .nav-link {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <strong>👥 Управление персоналом</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/persons"> Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/persons/view/all"> Все записи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/persons/search"> Поиск</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                        <span class="navbar-text user-info">
+                            👋 Привет, <strong th:text="${currentUser}"></strong>!
+                        </span>
+                </li>
+                <li class="nav-item" th:if="${isAuthenticated}">
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="nav-link border-0 bg-transparent" style="color: rgba(255,255,255,.55);">
+                             Выйти
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item" th:unless="${isAuthenticated}">
+                    <a class="nav-link" href="/login"> Войти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Поиск пользователей</h2>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Поиск по фамилии
+        </div>
+        <div class="card-body">
+            <form th:action="@{/persons/search/lastname}" method="get">
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Фамилия:</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Поиск по имени и фамилии
+        </div>
+        <div class="card-body">
+            <form th:action="@{/persons/search/fullname}" method="get">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">Имя:</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="lastNameFull" class="form-label">Фамилия:</label>
+                    <input type="text" class="form-control" id="lastNameFull" name="lastName" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Поиск по email
+        </div>
+        <div class="card-body">
+            <form th:action="@{/persons/search/email}" method="get">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Поиск по возрасту
+        </div>
+        <div class="card-body">
+            <form th:action="@{/persons/search/age}" method="get">
+                <div class="mb-3">
+                    <label for="age" class="form-label">Возраст старше:</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

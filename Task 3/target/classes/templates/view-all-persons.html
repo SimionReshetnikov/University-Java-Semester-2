@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр всех записей</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .person-card {
+            transition: transform 0.2s;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .person-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .stats-card {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .clickable-name {
+            color: #0d6efd;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .clickable-name:hover {
+            color: #0a58ca;
+            text-decoration: underline;
+        }
+        .table-row:hover {
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+        .navbar-custom {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            margin-bottom: 30px;
+        }
+        .user-info {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+        .nav-link {
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <strong> Управление персоналом</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/persons"> Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/persons/view/all"> Все записи</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/persons/search"> Поиск</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                        <span class="navbar-text user-info">
+                             Привет, <strong th:text="${currentUser}"></strong>!
+                        </span>
+                </li>
+                <li class="nav-item" th:if="${isAuthenticated}">
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="nav-link border-0 bg-transparent" style="color: rgba(255,255,255,.55);">
+                             Выйти
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item" th:unless="${isAuthenticated}">
+                    <a class="nav-link" href="/login"> Войти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <!-- Заголовок и статистика -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="text-center mb-4"> Все записи в базе данных</h1>
+
+            <div class="card stats-card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Общая статистика</h5>
+                    <p class="card-text display-6" th:text="${totalCount} + ' записей'"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Сообщение если нет записей -->
+    <div th:if="${persons.empty}" class="alert alert-warning text-center">
+        <h4>📭 Записей не найдено</h4>
+        <p>В базе данных пока нет записей. Добавьте первую запись!</p>
+        <a href="/persons" class="btn btn-primary">Добавить запись</a>
+    </div>
+
+    <!-- Таблица с записями -->
+    <div th:unless="${persons.empty}" class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"> Список всех пользователей</h5>
+            <small class="text-muted">Нажмите на фамилию для просмотра детальной информации</small>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-primary">
+                    <tr>
+                        <th width="80">ID</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Email</th>
+                        <th width="100">Возраст</th>
+                        <th width="180">Дата создания</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="person : ${persons}" class="table-row">
+                        <td>
+                            <span class="badge bg-secondary" th:text="${person.id}"></span>
+                        </td>
+                        <td th:text="${person.firstName}"></td>
+                        <td>
+                            <a th:href="@{/persons/view/{id}(id=${person.id})}"
+                               class="clickable-name fw-bold"
+                               th:text="${person.lastName}">
+                            </a>
+                        </td>
+                        <td>
+                            <span th:if="${person.email}" th:text="${person.email}"></span>
+                            <span th:unless="${person.email}" class="text-muted fst-italic">не указан</span>
+                        </td>
+                        <td>
+                                <span th:if="${person.age}"
+                                      class="badge bg-info"
+                                      th:text="${person.age}"></span>
+                            <span th:unless="${person.age}"
+                                  class="text-muted fst-italic">—</span>
+                        </td>
+                        <td>
+                            <small th:text="${#temporals.format(person.createdDate, 'dd.MM.yyyy HH:mm')}"></small>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Панель навигации (ОСТАВИЛИ ТОЛЬКО ВЕРХНЮЮ) -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="/persons" class="btn btn-primary me-md-2">
+                     Добавить новую запись
+                </a>
+                <a href="/persons/search" class="btn btn-outline-secondary">
+                     Поиск записей
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
