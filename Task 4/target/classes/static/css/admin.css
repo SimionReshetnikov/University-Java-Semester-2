@@ -1,0 +1,298 @@
+/* src/main/resources/static/css/admin.css */
+
+/* Стили для админ-панели */
+.admin-navbar {
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 0.8rem 0;
+}
+
+.admin-navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-navbar .navbar-brand::before {
+    content: "🛡️";
+    font-size: 1.8rem;
+}
+
+.admin-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.admin-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.admin-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #4a54e1, #7e3ff2);
+}
+
+.admin-card.stats-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.admin-card.stats-card .card-title {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.admin-card.stats-card .card-text {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.admin-card .card-header {
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1.2rem 1.5rem;
+    border: none;
+}
+
+.action-btn {
+    min-width: 100px;
+    margin: 0.25rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Сетка для админ-панели */
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Форма админа */
+.admin-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.admin-form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid #4a54e1;
+}
+
+.admin-form-header h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.admin-form-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Таблица в админке */
+.admin-table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table thead {
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+}
+
+.admin-table thead th {
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1.2rem 1rem;
+    border: none;
+}
+
+.admin-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.admin-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+    background: linear-gradient(45deg, rgba(74, 84, 225, 0.05), rgba(126, 63, 242, 0.05));
+    transform: translateX(5px);
+}
+
+.admin-table tbody td {
+    padding: 1.2rem 1rem;
+    vertical-align: middle;
+    border: none;
+}
+
+/* Иконки действий */
+.action-icons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.action-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.action-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.action-icon.edit {
+    background: linear-gradient(45deg, #4a54e1, #7e3ff2);
+}
+
+.action-icon.view {
+    background: linear-gradient(45deg, #17a2b8, #20c997);
+}
+
+.action-icon.delete {
+    background: linear-gradient(45deg, #dc3545, #e83e8c);
+}
+
+/* Статус в таблице */
+.status-badge {
+    padding: 0.4em 1em;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 80px;
+    text-align: center;
+}
+
+.status-active {
+    background: linear-gradient(45deg, #d4edda, #c3e6cb);
+    color: #155724;
+}
+
+.status-inactive {
+    background: linear-gradient(45deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+}
+
+/* Анимация загрузки для админки */
+.admin-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4a54e1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Модальные окна для админки */
+.admin-modal {
+    border-radius: 15px;
+    overflow: hidden;
+    border: none;
+}
+
+.admin-modal .modal-header {
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+    color: white;
+    border: none;
+    padding: 1.5rem;
+}
+
+.admin-modal .modal-body {
+    padding: 2rem;
+}
+
+.admin-modal .modal-footer {
+    border: none;
+    padding: 1.5rem;
+    background: #f8f9fa;
+}
+
+/* Адаптивность админки */
+@media (max-width: 768px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table {
+        font-size: 0.9rem;
+    }
+
+    .action-btn {
+        min-width: auto;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .admin-form-container {
+        padding: 1rem;
+        margin: 0 0.5rem;
+    }
+}

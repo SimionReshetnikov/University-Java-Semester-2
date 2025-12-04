@@ -1,0 +1,303 @@
+/* src/main/resources/static/css/forms.css */
+
+/* Стили для форм */
+.form-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin: 2rem auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #4a54e1, #7e3ff2);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+}
+
+.form-title h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-title p {
+    color: #666;
+    opacity: 0.8;
+}
+
+/* Поля формы */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.required-field::after {
+    content: " *";
+    color: #dc3545;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #4a54e1;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74, 84, 225, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input.error {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+.form-input.success {
+    border-color: #28a745;
+    background: #f0fff4;
+}
+
+/* Подсказки и ошибки */
+.form-hint {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.form-error {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #dc3545;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.form-error.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Кнопки формы */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.form-btn {
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.form-btn-primary {
+    background: linear-gradient(45deg, #4a54e1, #7e3ff2);
+    color: white;
+}
+
+.form-btn-primary:hover {
+    background: linear-gradient(45deg, #3a44d1, #6e2fe2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 84, 225, 0.3);
+}
+
+.form-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.form-btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.form-btn-block {
+    width: 100%;
+}
+
+/* Чекбоксы и радиокнопки */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-check-input:checked {
+    background-color: #4a54e1;
+    border-color: #4a54e1;
+}
+
+.form-check-label {
+    cursor: pointer;
+    user-select: none;
+    color: #495057;
+}
+
+/* Селекты */
+.form-select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #f8f9fa url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") no-repeat right 1rem center/16px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #4a54e1;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(74, 84, 225, 0.1);
+}
+
+/* Текстовые области */
+.form-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #4a54e1;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(74, 84, 225, 0.1);
+}
+
+/* Индикаторы силы пароля */
+.password-strength {
+    margin-top: 0.5rem;
+    height: 5px;
+    background: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.password-strength-meter {
+    height: 100%;
+    width: 0%;
+    background: #dc3545;
+    transition: all 0.3s ease;
+}
+
+.password-strength-meter.weak {
+    width: 33%;
+    background: #dc3545;
+}
+
+.password-strength-meter.medium {
+    width: 66%;
+    background: #ffc107;
+}
+
+.password-strength-meter.strong {
+    width: 100%;
+    background: #28a745;
+}
+
+/* Тогглер пароля */
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 2.5rem;
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #4a54e1;
+}
+
+/* Анимация форм */
+@keyframes formSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-section {
+    animation: formSlideIn 0.6s ease-out;
+}
+
+/* Адаптивность форм */
+@media (max-width: 576px) {
+    .form-section {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-btn {
+        width: 100%;
+    }
+}
